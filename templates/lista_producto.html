@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block titulo %}
+    lista de productos
+{% endblock %}
+{% block contenido %}
+    <h1>lista de productos</h1>
+    {% for p in lista %}
+    
+        <p>
+            Nombre: {{ p.nombre }}
+            Precio: {{ p.precio }}
+            Stock: {{ p.stock }}
+            Marca: {{ p.marca }}
+
+        </p>
+       
+    
+    {% endfor %}
+
+
+{% endblock %}
+
+    
+</body>
+</html>
