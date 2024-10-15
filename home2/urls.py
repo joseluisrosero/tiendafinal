@@ -8,5 +8,5 @@ urlpatterns = [
     path('', vista_funko, name='funko'),
     path('contacto/',vista_contacto),   
     path('lista_producto/',vista_lista_producto),
-
+    path('agregar_producto/',vista_agregar_producto,name='vista_agregar_producto'),
 ] 
