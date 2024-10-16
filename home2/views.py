@@ -47,5 +47,8 @@ def vista_agregar_producto(request):
     else: 
         formulario = agregar_producto_form()
     return render(request, 'vista_agregar_producto.html',locals())
-        
+
+def vista_ver_producto(request, id_prod):
+    p = Producto.objects.get(id=id_prod)
+    return render(request,'ver_producto.html',locals())
 

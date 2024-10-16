@@ -9,4 +9,5 @@ urlpatterns = [
     path('contacto/',vista_contacto,name='vista_contacto'),   
     path('lista_producto/',vista_lista_producto),
     path('agregar_producto/',vista_agregar_producto,name='vista_agregar_producto'),
+    path('ver_producto/<int:id_prod>/', vista_ver_producto,name='vista_ver_producto'),
 ] 
