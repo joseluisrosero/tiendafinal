@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import*
-from .models import Producto
+from .models import*
 from django.shortcuts import redirect
 
 
