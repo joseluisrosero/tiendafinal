@@ -7,16 +7,22 @@
 </head>
 <body>
     {% extends 'base.html' %}
-    {% block title %} {{ p.nombre }} {% endblock %}
-    {% block content %}
+    {% block title %}
+     {{ p.nombre }} 
+    {% endblock %}
+
+    {% block contenido %}
         <h1>Detalles</h1>
-        <p><b>Nombre: </b> $ {{ p.nombre }}</p>
+        <p><b>Nombre: </b>  {{ p.nombre }}</p>
         <p><b>Precio: </b> $ {{ p.precio }}</p>
-        <p><b>Stock: </b> $ {{ p.stock }} unidades</p>
-        <p><b>Marca: </b> $ {{ p.marca }}</p>
+        <p><b>Stock: </b>  {{ p.stock }} unidades</p>
+        <p><b>Marca: </b>  {{ p.marca }} </p>
+
+        
         {% for c in categorias %}
             <span class="label label-info">{{ c.nombre }}</span>
         {% endfor %}
+        
         {% if p.categorias.all %}
             <h2>Categorías</h2>
             {% for pc in p.categorias.all %}
@@ -26,7 +32,8 @@
             <h3>Sin categorías</h3>
         {% endif %}
         <br>
-        <a href="{% url 'vista_agregar_producto' %}">Regresar a la lista</a>
+        <a href="{% url 'vista_agregar_producto' %}">Regresar a la lista</a><br>
+        <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Ver Detalles</a>
     {% endblock %}
 
     
