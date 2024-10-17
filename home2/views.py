@@ -58,10 +58,10 @@ def vista_editar_producto(request, id_prod):
         formulario = agregar_producto_form(request.POST, request.FILES, instance=prod)
         if formulario.is_valid():
             prod = formulario.save()
-            return redirect ('/lista_producto/')
+            return redirect ('vista_ver_producto',id_prod=prod.id)
     else: 
         formulario = agregar_producto_form(instance = prod)
-    return render(request, 'vista_agregar_producto.html',locals())
+    return render(request, 'vista_editar_producto.html',locals())
 
 def vista_eliminar_producto(request, id_prod):
     prod = Producto.objects.get(id=id_prod)

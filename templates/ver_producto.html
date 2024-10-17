@@ -14,27 +14,23 @@
     {% block contenido %}
         <h1>Detalles</h1>
         <p><b>Nombre: </b>  {{ p.nombre }}</p>
-        <p><b>Descripcion: </b>  {{ p.descripcion }}</p>
-        <p><b>Precio: </b> $ {{ p.precio }}</p>
-        <p><b>Stock: </b>  {{ p.stock }} unidades</p>
         <p><b>Marca: </b>  {{ p.marca }} </p>
-
-        
-        {% for c in categorias %}
-            <span class="label label-info">{{ c.nombre }}</span>
-        {% endfor %}
-        
-        {% if p.categorias.all %}
-            <h2>Categorías</h2>
-            {% for pc in p.categorias.all %}
-                {{ pc }}
+        <p><b>Categorías:</b>
+         {% if p.categorias.all %}
+            {% for categoria in p.categorias.all %}
+                <span class="label label-info">{{ categoria.nombre }}</span>
             {% endfor %}
         {% else %}
             <h3>Sin categorías</h3>
         {% endif %}
-        <br>
+        <p><b>Descripcion: </b>  {{ p.descripcion }}</p>
+        <p><b>Precio: </b> $ {{ p.precio }}</p>
+        <p><b>Stock: </b>  {{ p.stock }} unidades</p>
+        
+       
+        
         <a href="{% url 'vista_lista_producto' %}">Regresar a la lista</a><br>
-        <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Ver Detalles</a>
+        <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a>
     {% endblock %}
 
     
