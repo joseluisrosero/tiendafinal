@@ -30,7 +30,8 @@
        
         
         <a href="{% url 'vista_lista_producto' %}">Regresar a la lista</a><br>
-        <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a>
+        <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a><br>
+        <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}">Eliminar</a>
     {% endblock %}
 
     
