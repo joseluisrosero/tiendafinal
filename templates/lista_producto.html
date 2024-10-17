@@ -12,20 +12,20 @@
 {% endblock %}
 {% block contenido %}
     <h1>lista de productos</h1>
-
-    {% for p in lista %}
-    
-        <p>
-            Nombre: {{ p.nombre }}
-            Precio: {{ p.precio }}
-            Stock: {{ p.stock }}
-            Marca: {{ p.marca }}
-
-        </p>
-       
+    <ul>
+        {% for p in lista %}
+        <li>
+        
+            <p><b>Nombre:</b> {{ p.nombre }}</p>
+            <p><b> Precio:</b> {{ p.precio }}</p>
+            <p><b>Stock:</b> {{ p.stock }}</p>
+            <p><b>Marca:</b>{{ p.marca }}</p>
+            
+        
+        </li>
     
     {% endfor %}
-
+</ul>
 
 {% endblock %}
 
