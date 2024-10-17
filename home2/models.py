@@ -24,6 +24,7 @@ class Producto(models.Model):
     stock = models.IntegerField(validators=[MinValueValidator(0)])
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     categorias = models.ManyToManyField(Categoria)
+    imagen = models.ImageField(upload_to='productos/', null=True, blank=True) 
 
 
     def __str__(self):

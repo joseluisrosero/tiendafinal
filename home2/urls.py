@@ -12,4 +12,6 @@ urlpatterns = [
     path('ver_producto/<int:id_prod>/', vista_ver_producto,name='vista_ver_producto'),
     path('editar_producto/<int:id_prod>/', vista_editar_producto,name='vista_editar_producto'),
     path('eliminar_producto/<int:id_prod>/', vista_eliminar_producto,name='vista_eliminar_producto'),
-] 
+    
+]
+

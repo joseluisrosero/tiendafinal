@@ -67,3 +67,5 @@ def vista_eliminar_producto(request, id_prod):
     prod = Producto.objects.get(id=id_prod)
     prod.delete()
     return redirect ('/lista_producto')
+
+

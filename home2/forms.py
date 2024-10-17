@@ -13,5 +13,3 @@ class agregar_producto_form(forms.ModelForm):
         model = Producto 
         fields = '__all__'
 
-
-    

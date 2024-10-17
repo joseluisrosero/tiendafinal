@@ -21,9 +21,12 @@
             <p><b> Precio:</b> {{ p.precio }}</p>
             <p><b>Stock:</b> {{ p.stock }}</p>
             
+            
             <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Ver Producto</a><br>
             <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a><br>
             {# <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}">Eliminar</a> #}
+
+            
         
         </li>
     
