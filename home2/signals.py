@@ -8,7 +8,7 @@ def despues_de_guardar(sender, instance, created, **kwargs):
     if created:
         print(f'Se ha creado un nuevo producto: {instance.nombre}')
     else:
-        print(f'Se ha actualizado el producto: {instance.nombre}')
+        print(f'Se ha actualizado el producto: {instance.nombre}') 
 
 
         
