@@ -3,20 +3,33 @@
 {% block titulo %}
     lista de productos
 {% endblock %}
+
+
 {% block contenido %}
     <h1>lista de productos</h1>
     <ul>
         {% for p in lista %}
         <li>
-        
+
+            
+           
             <p><b>Nombre:</b> {{ p.nombre }}</p>
             <p><b>Marca:</b>{{ p.marca }}</p>
             <p><b> Precio:</b> {{ p.precio }}</p>
+
+            {% comment %}
             <p><b>Stock:</b> {{ p.stock }}</p>
             <p><b>Descripcion:</b> {{ p.descripcion }}</p>
+            {% endcomment %}
+
+            <p><b>Foto:</b></p>
+            {% if p.imagen %}
+            <img src="/media/{{ p.imagen }}" height="300px"> <br>
+            {% endif %}
+    
             
             
-            <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Ver Producto</a><br>
+            <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Mas detalles</a><br>
             <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a><br>
             {# <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}">Eliminar</a> #}
 
