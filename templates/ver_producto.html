@@ -23,7 +23,7 @@
         {% else %}
             <h3>Sin categorías</h3>
         {% endif %}
-        <p><b>Descripcion: </b>  {{ p.descripcion }}</p>
+        <p><b>Descripcion: </b>  {{ p.descripcion|linebreaks }}</p>
         <p><b>Precio: </b> $ {{ p.precio }}</p>
         <p><b>Stock: </b>  {{ p.stock }} unidades</p>      
         {% if p.imagen %}
