@@ -121,6 +121,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = 'static'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = 'media'
+
+
 
 
 # Default primary key field type
@@ -133,4 +143,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'roseroquicazanjoseluis@gmail.com'
-EMAIL_HOST_PASSWORD = 'utqkdguxnsznnkln'
+EMAIL_HOST_PASSWORD = ''

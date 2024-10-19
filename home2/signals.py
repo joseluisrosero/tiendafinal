@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from .models import*
 from django.core.mail import send_mail
 
-@receiver(post_save, sender=Producto)
+"""@receiver(post_save, sender=Producto)
 def enviar_correo_despues_de_guardar(sender, instance, created, **kwargs):
     if created:
         asunto = 'Nuevo producto creado'
@@ -16,7 +16,7 @@ def enviar_correo_despues_de_guardar(sender, instance, created, **kwargs):
         asunto,
         mensaje,
         'roseroquicazanjoseluis@gmail.com',
-        ['j.lucho9006@gmail.com'])
+        ['j.lucho9006@gmail.com']) """
     
 @receiver(pre_save, sender=Producto)
 def antes_de_guardar(sender, instance, **kwargs):
@@ -24,16 +24,7 @@ def antes_de_guardar(sender, instance, **kwargs):
         print(f"El producto {instance.nombre} se va a actualizar")
     else:
         print(f"El producto {instance.nombre} se va a guardar por primera vez")
-
-        
-
-pre_save.disconnect(antes_de_guardar, sender=Producto)
-
-
-
-
-"""
-
+      
 
 @receiver(post_save, sender=Producto)
 def despues_de_guardar(sender, instance, created, **kwargs):
@@ -53,4 +44,4 @@ def despues_de_eliminar(sender, instance, **kwargs):
     print(f'Se ha eliminado el producto: {instance.nombre}')
 
 
-    )"""
+    
