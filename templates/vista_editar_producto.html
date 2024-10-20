@@ -9,7 +9,9 @@
         {{ formulario.as_p }}
         
 
-        <input type="submit" value="Editar producto">
+        <input type="submit" value="Editar producto" class="btn btn-primary">
+        <a href="{% url 'vista_lista_producto' %}" class="btn btn-secondary">Cancelar</a>
+
   
     </form>
 {%endblock %} 

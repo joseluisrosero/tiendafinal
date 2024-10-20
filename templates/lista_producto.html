@@ -11,13 +11,13 @@
         <div class="col-md-3">
             <div class="card mb-4">
                 {% if p.imagen %}
-                <img src="/media/{{ p.imagen }}" class="card-img-top" alt="{{ p.nombre }}">
+                <img src="/media/{{ p.imagen }}" class="card-img-top w-auto h-auto" alt="{{ p.nombre }}" style="height: 300px; object-fit: cover;" >
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ p.nombre }}</h5>
                     <p class="card-"><b>Marca:</b> {{ p.marca }}</p>
                     <p class="card-text"><b>Precio:</b> {{ p.formatted_precio }} COP</p>
-                    <!-- Comentado por ahora
+                    <!-- 
                     <p class="card-text"><b>Stock:</b> {{ p.stock }}</p>
                     <p class="card-text"><b>Descripción:</b> {{ p.descripcion }}</p>
                     -->
