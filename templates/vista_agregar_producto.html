@@ -3,7 +3,7 @@
 {% block titulo %} agregar productos{% endblock %}
 
 {% block contenido %}
-    <h1>agregar productos</h1>
+    <h1>Agregar productos</h1>
     <form action="" method= "POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ formulario.as_p }}

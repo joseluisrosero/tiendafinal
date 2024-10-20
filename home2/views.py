@@ -3,10 +3,6 @@ from .forms import*
 from .models import*
 from django.contrib.auth import login, logout, authenticate
 
-
-
-
-
 # Create your views here.
 
 def vista_lista_producto (request):
@@ -92,3 +88,19 @@ def vista_login (request):
 def vista_logout (request):
     logout(request)
     return redirect('/login')
+
+def vista_register(request):
+    formulario = register_form()
+    if request.method == 'POST':
+        formulario = register_form(request.POST)
+        if formulario.is_valid():
+            usuario = formulario.cleaned_data['username']
+            correo = formulario.cleaned_data['email']
+            password_1 = formulario.cleaned_data['password_1']
+            password_2 = formulario.cleaned_data['password_2']
+            u = User.objects.create_user(username=usuario, email=correo, password=password_1)
+            u.save()
+            return render(request, 'thanks_for_register.html', locals())
+        else:
+            return render(request, 'register.html', locals())
+    return render(request, 'register.html', locals())

@@ -7,6 +7,9 @@
     <form action=  "" method="POST">
         {% csrf_token %}
         {{ formulario.as_p }}
-        <input type="submit" value ="login">
+        <input type="submit" value="Login" class="btn btn-primary"  >
+        <a href="{% url 'vista_lista_producto' %}" class="btn btn-danger">Cancelar</a>
     </form>
 {% endblock %} 
+
+     

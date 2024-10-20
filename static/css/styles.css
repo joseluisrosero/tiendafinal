@@ -1,5 +1,6 @@
 .card-img-top {
     width: 100%;
-    height: 400px; /* Ajusta según tus necesidades */
+    height: 300px; /* Ajusta según tus necesidades */
     object-fit: cover;
+    object-position: center; /* Opcional: asegura que el centro de la imagen esté siempre visible */
 }
