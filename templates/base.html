@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %}Mi Sitio{% endblock %}</title>
-  
+    <title>{% block titulo %}funkopop_ayan{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Inicio</a></li>
-                <li><a href="{% url 'funko' %}">funko</a></li>
-                <li><a href="{% url 'vista_agregar_producto' %}">agregar</a></li>
-                <li><a href="{% url 'vista_lista_producto' %}">lista de productos</a></li>
-                
-
-              
-
-                <!-- Otros enlaces -->
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">funkopop_ayan</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'funko' %}">Funko</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vista_agregar_producto' %}">Agregar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vista_lista_producto' %}">Lista de Productos</a>
+                    </li>
+                    <!-- Otros enlaces -->
+                </ul>
+            </div>
         </nav>
     </header>
     <main>
+          
+
         {% block contenido %}
         <!-- Contenido específico de cada página -->
         {% endblock %}
     </main>
-    
-        <p>&copy; pagina web funkopop_ayan</p>
-   
+    <p>&copy; pagina web funkopop_ayan</p>
 </body>
+</html>

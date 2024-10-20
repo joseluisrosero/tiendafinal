@@ -1,45 +1,33 @@
-
 {% extends 'base.html' %}
-{% block titulo %}
-    lista de productos
-{% endblock %}
 
+{% block titulo %} Lista de productos {% endblock %}
 
 {% block contenido %}
-    <h1>lista de productos</h1>
-    <ul>
+
+<div class="container">
+    <h1 class="text-center">Lista de productos</h1><br>
+    <div class="row">
         {% for p in lista %}
-        <li>
-
-            
-           
-            <p><b>Nombre:</b> {{ p.nombre }}</p>
-            <p><b>Marca:</b>{{ p.marca }}</p>
-            <p><b> Precio:</b> {{ p.precio }}</p>
-
-            {% comment %}
-            <p><b>Stock:</b> {{ p.stock }}</p>
-            <p><b>Descripcion:</b> {{ p.descripcion }}</p>
-            {% endcomment %}
-
-            <p><b>Foto:</b></p>
-            {% if p.imagen %}
-            <img src="/media/{{ p.imagen }}" height="300px"> <br>
-            {% endif %}
-    
-            
-            
-            <a href="{% url 'vista_ver_producto' id_prod=p.id %}">Mas detalles</a><br>
-            <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a><br>
-            {# <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}">Eliminar</a> #}
-
-            
-        
-        </li>
-    
-    {% endfor %}
-</ul>
-
+        <div class="col-md-3">
+            <div class="card mb-4">
+                {% if p.imagen %}
+                <img src="/media/{{ p.imagen }}" class="card-img-top" alt="{{ p.nombre }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.nombre }}</h5>
+                    <p class="card-"><b>Marca:</b> {{ p.marca }}</p>
+                    <p class="card-text"><b>Precio:</b> {{ p.formatted_precio }} COP</p>
+                    <!-- Comentado por ahora
+                    <p class="card-text"><b>Stock:</b> {{ p.stock }}</p>
+                    <p class="card-text"><b>Descripción:</b> {{ p.descripcion }}</p>
+                    -->
+                    <a href="{% url 'vista_ver_producto' id_prod=p.id %}" class="btn btn-primary">Más detalles</a>
+                    <a href="{% url 'vista_editar_producto' id_prod=p.id %}" class="btn btn-secondary">Editar</a>
+                    {# <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a> #}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
-
-    

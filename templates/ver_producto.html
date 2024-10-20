@@ -1,46 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% extends 'base.html' %}
-    {% block title %}
-     {{ p.nombre }} 
-    {% endblock %}
+{% extends 'base.html' %}
 
-    {% block contenido %}
-        <h1>Detalles</h1>
-        <p><b>Nombre: </b>  {{ p.nombre }}</p>
-        <p><b>Marca: </b>  {{ p.marca }} </p>
-        <p><b>Categorías:</b>
-         {% if p.categorias.all %}
-            {% for categoria in p.categorias.all %}
-                <span class="label label-info">{{ categoria.nombre }}</span>
-            {% endfor %}
-        {% else %}
-            <h3>Sin categorías</h3>
-        {% endif %}
-        <p><b>Descripcion: </b>  {{ p.descripcion|linebreaks }}</p>
-        <p><b>Precio: </b> $ {{ p.precio }}</p>
-        <p><b>Stock: </b>  {{ p.stock }} unidades</p>      
-        {% if p.imagen %}
-            <img src="/media/{{ p.imagen }}" height="300px"> <br>
-        {% endif %}
-    
-            
-       
-        
-        <a href="{% url 'vista_lista_producto' %}">Regresar a la lista</a><br>
-        <a href="{% url 'vista_editar_producto' id_prod=p.id %}">Editar</a><br>
-        <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}">Eliminar</a>
-        
+{% block title %} {{ p.nombre }} {% endblock %}
 
-    {% endblock %}
-
-    
-</body>
-</html>
-
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8" text-center>
+            <h1 class="text-center">Detalles</h1>
+            <div class="card mb-4">
+                {% if p.imagen %}
+                <img src="/media/{{ p.imagen }}" class="card-img-top" alt="{{ p.nombre }}" style="width: 50%; margin: auto;">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{ p.nombre }}</h3>
+                    <p class="card-text"><b>Marca: </b> {{ p.marca }}</p>
+                    <p class="card-text"><b>Categorías:</b>
+                        {% if p.categorias.all %}
+                        {% for categoria in p.categorias.all %}
+                        <span class="label label-info">{{ categoria.nombre }}</span>
+                        {% endfor %}
+                        {% else %}
+                        <h3>Sin categorías</h3>
+                        {% endif %}
+                    </p>
+                    <p class="card-text"><b>Descripción: </b> {{ p.descripcion|linebreaks }}</p>
+                    <p class="card-text"><b>Precio: </b>  {{ p.formatted_precio }} COP</p>
+                    <p class="card-text"><b>Stock: </b> {{ p.stock }} unidades</p>
+                    <a href="{% url 'vista_lista_producto' %}" class="btn btn-primary">Regresar a la lista</a>
+                    <a href="{% url 'vista_editar_producto' id_prod=p.id %}" class="btn btn-secondary">Editar</a>
+                    <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

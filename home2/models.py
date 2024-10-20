@@ -29,6 +29,10 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    def formatted_precio(self):
+        return "${:,.0f}".format(self.precio)
+    
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=100)
