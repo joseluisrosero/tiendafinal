@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from .forms import*
 from .models import*
+from django.contrib.auth import login, logout, authenticate
+
+
 
 
 
@@ -69,3 +72,23 @@ def vista_eliminar_producto(request, id_prod):
     return redirect ('/lista_producto')
 
 
+def vista_login (request):
+    usu = ""
+    cla = ""
+    if request.method == "POST":
+        formulario = login_form(request.POST)
+        if formulario.is_valid():
+            usu = formulario.cleaned_data['usuario']
+            cla = formulario.cleaned_data['clave']
+            Usuario = authenticate(usurname=usu, password=cla)
+            if   Usuario is not None and Usuario.is_activate:
+                 login(request, Usuario)
+                 return redirect('/')
+            else:
+                msj = "usuario o clave incorrectos"
+    formulario = login_form()
+    return render(request, 'login.html', locals())
+
+def vista_logout (request):
+    logout(request)
+    return redirect('/login')

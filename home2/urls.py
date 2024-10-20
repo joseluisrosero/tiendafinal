@@ -1,6 +1,7 @@
 from django.urls import path 
 from .views import*
 
+
 urlpatterns = [
 
     path('home/', vista_home, name='home'),
@@ -12,6 +13,8 @@ urlpatterns = [
     path('ver_producto/<int:id_prod>/', vista_ver_producto,name='vista_ver_producto'),
     path('editar_producto/<int:id_prod>/', vista_editar_producto,name='vista_editar_producto'),
     path('eliminar_producto/<int:id_prod>/', vista_eliminar_producto,name='vista_eliminar_producto'),
+    path('login/',vista_login, name='vista_login'),
+    path('logout/',vista_logout, name='vista_logout'),
     
 ]
 
