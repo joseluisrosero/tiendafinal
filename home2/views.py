@@ -104,3 +104,7 @@ def vista_register(request):
         else:
             return render(request, 'register.html', locals())
     return render(request, 'register.html', locals())
+
+def base_view(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'base.html', {'categorias': categorias})

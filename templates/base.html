@@ -28,6 +28,16 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_lista_producto' %}">Lista de Productos</a>
+                    </li>                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categorías
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for categoria in categorias %}
+                                <a class="dropdown-item" href="#">{{ categoria.nombre }}</a>
+                            {% endfor %}
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_login' %}">Iniciar Sesion</a>
@@ -37,9 +47,7 @@
             </div>
         </nav>
     </header>
-    <main>
-          
-
+    <main>        
         {% block contenido %}
         <!-- Contenido específico de cada página -->
         {% endblock %}
