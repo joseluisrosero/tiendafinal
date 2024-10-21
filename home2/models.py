@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Marca(models.Model):
@@ -58,3 +60,8 @@ class DetallePedido(models.Model):
 
     def __str__(self):
         return f'{self.cantidad} x {self.producto.nombre}'
+    
+class perfil (models.Model):
+    user    =models.OneToOneField(User, on_delete=models.CASCADE)
+    foto    =models.ImageField(upload_to='perfiles' , null=True,  blank=True)
+    nombre  =models.CharField(max_length= 100)

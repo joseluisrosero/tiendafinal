@@ -1,6 +1,14 @@
-.card-img-top {
+.img-container {
     width: 100%;
-    height: 300px; /* Ajusta según tus necesidades */
-    object-fit: cover;
-    object-position: center; /* Opcional: asegura que el centro de la imagen esté siempre visible */
+    height: 420px; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover; 
 }

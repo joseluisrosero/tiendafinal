@@ -10,9 +10,11 @@
         {% for p in lista %}
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card mb-4">
-                {% if p.imagen %}
-                <img src="/media/{{ p.imagen }}" class="card-img-top img-fluid" alt="{{ p.nombre }}" style="height: 300px; object-fit: cover;" >
-                {% endif %}
+                <div class= "img-container">
+                    {% if p.imagen %}
+                    <img src="/media/{{ p.imagen }}" class="card-img-top img-fluid" alt="{{ p.nombre }}">
+                    {% endif %}
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ p.nombre }}</h5>
                     <p class="card-"><b>Marca:</b> {{ p.marca }}</p>

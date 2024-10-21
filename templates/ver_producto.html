@@ -9,7 +9,7 @@
             <h1 class="text-center">Detalles</h1>
             <div class="card mb-4">
                 {% if p.imagen %}
-                <img src="/media/{{ p.imagen }}" class="card-img-top" alt="{{ p.nombre }}" style="width: 50%; margin: auto;">
+                <img src="/media/{{ p.imagen }}" class="card-img-top img-fluid" alt="{{ p.nombre }}" style="max-width: 50%; height: auto; margin: auto;">
                 {% endif %}
                 <div class="card-body text-center">
                     <h3 class="card-title">{{ p.nombre }}</h3>
