@@ -150,3 +150,4 @@ EMAIL_HOST_PASSWORD = ''
 
 
 AUTH_PROFILE_MODULE= 'home.perfil'
+

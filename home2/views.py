@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import*
 from .models import*
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -33,6 +34,7 @@ def vista_contacto(request):
 
 def vista_home(request):
     return render(request, 'home.html')
+
 
 def vista_agregar_producto(request):
     if request.method == 'POST':
