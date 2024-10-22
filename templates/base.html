@@ -47,9 +47,11 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for marca in marcas %}
-                                <a class="dropdown-item" href="#">{{ marca.nombre }}</a>
+                                <a class="dropdown-item" href="{% url 'productos_por_marca' marca.id %}">{{ marca.nombre }}</a>
                             {% endfor %}
                         </div>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_login' %}">Iniciar Sesion</a>
                     </li>

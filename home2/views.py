@@ -110,3 +110,10 @@ def vista_register(request):
 def base_view(request):
     categorias = Categoria.objects.all()
     return render(request, 'base.html', {'categorias': categorias})
+
+
+def productos_por_marca(request, marca_id):
+    marca = Marca.objects.get(id=marca_id)
+    productos = Producto.objects.filter(marca=marca)
+    return render(request, 'productos_por_marca.html', {'productos': productos, 'marca': marca})
+
