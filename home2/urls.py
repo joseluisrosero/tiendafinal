@@ -17,6 +17,7 @@ urlpatterns = [
     path('logout/',vista_logout, name='vista_logout'),
     path('register/',vista_register, name='vista_register'),
     path('marca/<int:marca_id>/', productos_por_marca, name= 'productos_por_marca'),
+    path('categoria/<int:categoria_id>/', productos_por_categoria, name= 'productos_por_categoria'),
     
 ]
 

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block titulo %} Productos de la marca: {{ marca.nombre }} {% endblock %}
+{% block titulo %} {{ categoria.nombre }} {% endblock %}
 
 {% block contenido %}
 <div class="container">
-    <h1 class="text-center">Productos de la marca: {{ marca.nombre }}</h1><br>
+    <h1 class="text-center">{{categoria.nombre }}</h1><br>
     <div class="row">
         {% for producto in productos %}
         <div class="col-sm-6 col-md-4 col-lg-3">

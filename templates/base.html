@@ -35,7 +35,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for categoria in categorias %}
-                                <a class="dropdown-item" href="#">{{ categoria.nombre }}</a>
+                                <a class="dropdown-item" href="{% url 'productos_por_categoria' categoria.id %}">{{categoria.nombre}}</a>
                             {% endfor %}
                         </div>
                     </li>

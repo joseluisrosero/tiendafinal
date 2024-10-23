@@ -117,3 +117,8 @@ def productos_por_marca(request, marca_id):
     productos = Producto.objects.filter(marca=marca)
     return render(request, 'productos_por_marca.html', {'productos': productos, 'marca': marca})
 
+def productos_por_categoria(request, categoria_id):
+    categoria = Categoria.objects.get(id=categoria_id)
+    productos = Producto.objects.filter(categorias=categoria)
+    return render(request, 'productos_por_categoria.html', {'productos': productos, 'categoria': categoria})
+
