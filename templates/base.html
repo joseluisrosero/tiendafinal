@@ -7,6 +7,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="icon" type="images/x-icon" href="{% static 'images/favicon.ico' %}">
 </head>
 <body>
     <header>
@@ -20,9 +21,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'home' %}">Inicio <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'funko' %}">Funko</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_agregar_producto' %}">Agregar</a>
                     </li>
