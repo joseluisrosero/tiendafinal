@@ -9,17 +9,23 @@
         {% for producto in productos %}
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card mb-4">
-                {% if producto.imagen %}
-                <img src="/media/{{ producto.imagen }}" class="card-img-top img-fluid" alt="{{ producto.nombre }}">
+                <div class= "img-container">
+                    {% if producto.imagen %}
+                    <img src="/media/{{ producto.imagen }}" class="card-img-top img-fluid reduce-size" alt="{{ producto.nombre }}"2>
+                </div>
                 {% endif %}
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ producto.nombre }}</h5>
                     <p class="card-text"><b>Marca:</b> {{ producto.marca }}</p>
                     <p class="card-text"><b>Precio:</b> {{ producto.formatted_precio }} COP</p>
+                    
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+    <a href="{% url 'vista_lista_producto' %}" class="btn btn-primary">Regresar a la lista</a>
 </div>
+
 {% endblock %}
+

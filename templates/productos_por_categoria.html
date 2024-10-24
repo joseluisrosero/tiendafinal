@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 
-{% block titulo %} {{ categoria.nombre }} {% endblock %}
+{% block titulo %}Tipo de producto: {{ categoria.nombre }} {% endblock %}
 
 {% block contenido %}
+
 <div class="container">
-    <h1 class="text-center">{{categoria.nombre }}</h1><br>
+    <h1 class="text-center">Tipo de producto: {{categoria.nombre }}</h1><br>
     <div class="row">
         {% for producto in productos %}
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card mb-4">
-                {% if producto.imagen %}
-                <img src="/media/{{ producto.imagen }}" class="card-img-top img-fluid" alt="{{ producto.nombre }}">
-                {% endif %}
+                <div class= "img-container">
+                    {% if producto.imagen %}
+                    <img src="/media/{{ producto.imagen }}" class="card-img-top img-fluid " alt="{{ producto.nombre }}">
+                    {% endif %}
+                </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ producto.nombre }}</h5>
                     <p class="card-text"><b>Marca:</b> {{ producto.marca }}</p>
@@ -21,5 +24,7 @@
         </div>
         {% endfor %}
     </div>
+    <a href="{% url 'vista_lista_producto' %}" class="btn btn-primary">Regresar a la lista</a>
+
 </div>
 {% endblock %}
