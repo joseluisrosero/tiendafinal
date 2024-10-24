@@ -3,11 +3,14 @@ from .forms import*
 from .models import*
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from.log_manager import LogManager
 
 # Create your views here.
 
 def vista_lista_producto (request):
     lista = Producto.objects.filter()
+    logger = LogManager()
+    logger.log_info("Lista de productos cargada correctamente.")
     return render(request, 'lista_producto.html',locals())
 
 def vista_about(request):
