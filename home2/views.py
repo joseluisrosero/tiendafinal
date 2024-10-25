@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import*
 from .models import*
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from .decorators import login_required
 from.log_manager import LogManager
 
 # Create your views here.
@@ -38,7 +38,7 @@ def vista_contacto(request):
 def vista_home(request):
     return render(request, 'home.html')
 
-
+@login_required
 def vista_agregar_producto(request):
     if request.method == 'POST':
         formulario = agregar_producto_form(request.POST, request.FILES)
@@ -73,22 +73,28 @@ def vista_eliminar_producto(request, id_prod):
     return redirect ('/lista_producto')
 
 
-def vista_login (request):
-    usu = ""
-    cla = ""
+def vista_login(request):
+    mensaje = ""
     if request.method == "POST":
         formulario = login_form(request.POST)
         if formulario.is_valid():
             usu = formulario.cleaned_data['usuario']
             cla = formulario.cleaned_data['clave']
-            Usuario = authenticate(usurname=usu, password=cla)
-            if   Usuario is not None and Usuario.is_activate:
-                 login(request, Usuario)
-                 return redirect('/')
+            user = authenticate(username=usu, password=cla)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    request.session['usuario_id'] = user.id
+                    return redirect('vista_agregar_producto')
+                else:
+                    mensaje = 'Cuenta desactivada.'
             else:
-                msj = "usuario o clave incorrectos"
-    formulario = login_form()
-    return render(request, 'login.html', locals())
+                mensaje = 'Usuario o clave incorrectos.'
+    else:
+        formulario = login_form()
+    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje})
+
+
 
 def vista_logout (request):
     logout(request)

@@ -57,6 +57,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_register' %}">Registrarse</a>
                     </li>  
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vista_logout' %}">Cerrar Sesión</a>
+                        </li>
+                    {% endif %}
                     <!-- Otros enlaces -->
                 </ul>
             </div>

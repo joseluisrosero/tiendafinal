@@ -1,15 +1,18 @@
-{% extends 'base.html' %}
-
-{% block titulo %} Login {% endblock %}
+{% extends "base.html" %}
 
 {% block contenido %}
-    <h2> {{ msj }}</h2>
-    <form action=  "" method="POST">
-        {% csrf_token %}
-        {{ formulario.as_p }}
-        <input type="submit" value="Login" class="btn btn-primary"  >
-        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
-    </form>
-{% endblock %} 
-
-     
+    <div class="container mt-5">
+        <h1>Iniciar Sesión</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ formulario.as_p }}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                <a href="{% url 'vista_lista_producto' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+        {% if mensaje %}
+            <div class="alert alert-danger mt-3">{{ mensaje }}</div>
+        {% endif %}
+    </div>
+{% endblock %}
