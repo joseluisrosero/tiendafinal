@@ -1,17 +1,22 @@
-from home.models import *
-from .serializer import *
-from rest_framework import viewsets
+from rest_framework import serializers
+from home2.models import*
 
+class producto_serializer(serializers.HyperlinkedModelSerializer):
+    class Meta: 
+        model = Producto
+        fields = ('url','nombre','descripcion','status','precio','stock','marca','categorias','imagen',)
+        
 
-class producto_viewset(viewsets.ModelViewSet):
-    queryset = Producto.objects.all()
-    serializer_class = producto_serializer
+class marca_serializer(serializers.HyperlinkedModelSerializer):
+    class Meta: 
+        model = Marca
+        fields = ('url','id','nombre', )
+        
 
-class marca_viewset(viewsets.ModelViewSet):
-    queryset = Marca.objects.all()
-    serializer_class = marca_serializer
+class categoria_serializer(serializers.HyperlinkedModelSerializer):
+    class Meta: 
+        model = Categoria
+        fields = ('url','nombre', )
+        
 
-class categoria_viewset(viewsets.ModelViewSet):
-    queryset = Categoria.objects.all()
-    serializer_class = categoria_serializer
 

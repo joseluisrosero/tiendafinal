@@ -4,9 +4,9 @@ from home2.models import *
 from webservices.views import *
 
 router = routers.DefaultRouter()
-router.register(r'producto' , producto_viewset)
-router.register(r'marca' , marca_viewset)
-router.register(r'categoria' , categoria_viewset)
+router.register(r'productos' , producto_viewset)
+router.register(r'marcas' , marca_viewset)
+router.register(r'categorias' , categoria_viewset)
 
 urlpatterns = [
     
