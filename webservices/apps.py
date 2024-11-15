@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class WebserviceConfig(AppConfig):
+class WebservicesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'webservice'
+    name = 'webservices'
