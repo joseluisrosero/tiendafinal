@@ -42,6 +42,16 @@ class Producto(models.Model):
             if os.path.isfile(self.imagen.path):
                 os.remove(self.imagen.path)
         super().delete(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        try:
+            this = Producto.objects.get(id=self.id) 
+            if this.imagen != self.imagen: 
+                this.imagen.delete(save=False) 
+        except: 
+            pass 
+        super().save(*args, **kwargs)
+    
     
 
 class Usuario(models.Model):

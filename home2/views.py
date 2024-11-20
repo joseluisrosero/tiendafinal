@@ -6,6 +6,8 @@ from .decorators import login_required
 from.log_manager import LogManager
 from .utils.utils import resize_and_compress_image  
 import os
+import sys
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 # Create your views here.
@@ -72,8 +74,27 @@ def vista_editar_producto(request, id_prod):
     if request.method == 'POST':
         formulario = agregar_producto_form(request.POST, request.FILES, instance=prod)
         if formulario.is_valid():
-            prod = formulario.save()
+            prod = formulario.save(commit=False)
+
+        if 'imagen' in request.FILES: 
+            image = request.FILES['imagen'] 
+            
+            
+            img_io = resize_and_compress_image(image) 
+            
+            if img_io: 
+                image_name = image.name 
+                prod.imagen = InMemoryUploadedFile( img_io, 
+                    field_name='imagen', 
+                    name=image_name, 
+                    content_type=image.content_type, 
+                    size=sys.getsizeof(img_io), 
+                    charset=None )
+            
+            prod.save()
+            formulario.save_m2m()          
             return redirect ('vista_ver_producto',id_prod=prod.id)
+               
     else: 
         formulario = agregar_producto_form(instance = prod)
     return render(request, 'vista_editar_producto.html',locals())
