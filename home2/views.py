@@ -4,6 +4,9 @@ from .models import*
 from django.contrib.auth import login, logout, authenticate
 from .decorators import login_required
 from.log_manager import LogManager
+from .utils.utils import resize_and_compress_image  
+import os
+
 
 # Create your views here.
 
@@ -47,6 +50,14 @@ def vista_agregar_producto(request):
             prod.status = True
             prod.save()
             formulario.save_m2m()
+            # Obtener la imagen cargada y la ruta de guardado
+            image = request.FILES['imagen']
+            output_path = os.path.join('media/productos', image.name) 
+            # Redimensionar y comprimir la imagen 
+            resize_and_compress_image(image, output_path)
+
+
+
             return redirect('/lista_producto/')
     else: 
         formulario = agregar_producto_form()
