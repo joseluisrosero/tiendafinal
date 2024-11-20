@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
@@ -34,6 +35,13 @@ class Producto(models.Model):
     
     def formatted_precio(self):
         return "${:,.0f}".format(self.precio)
+    
+    def delete(self, *args, **kwargs):
+
+        if self.imagen:
+            if os.path.isfile(self.imagen.path):
+                os.remove(self.imagen.path)
+        super().delete(*args, **kwargs)
     
 
 class Usuario(models.Model):
