@@ -1,8 +1,33 @@
+{% extends 'base.html' %}
+{% block titulo %} Inicio {% endblock %}
+{% block contenido %}
+<h1>Bienvenido a Mi Tienda Virtual</h1>
 
+<h2>Productos Nuevos</h2>
+<div class="container">
+    <div class="row">
+        {% for producto in productos_nuevos %}
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="card mb-4 text-center">
+                <div class="img-container">
+                    {% if producto.imagen %}
+                    <img src="/media/{{ producto.imagen }}" class="card-img-top img-fluid reduce-size" alt="{{ producto.nombre }}">
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-"><b>Marca:</b> {{ producto.marca }}</p>
+                    <p class="card-text"><b>Precio:</b> {{ producto.formatted_precio }} COP</p>
+                    <a href="{% url 'vista_ver_producto' id_prod=producto.id %}" class="btn btn-primary">Más detalles</a>
+                    <a href="{% url 'vista_editar_producto' id_prod=producto.id %}" class="btn btn-secondary">Editar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-    {% extends 'base.html' %}
-    {% block titulo %} Inicio {% endblock %}
-    {% block contenido %}
-    <h1>Bienvenido a Mi Tienda Virtual</h1>
+<!-- Aquí puedes agregar más secciones -->
+<!-- <h2>Otra Sección</h2> -->
 
-    {% endblock %} 
+{% endblock %}

@@ -41,7 +41,9 @@ def vista_contacto(request):
     return render(request,'contacto.html',locals())
 
 def vista_home(request):
-    return render(request, 'home.html')
+    productos_nuevos = Producto.objects.filter(status=True).order_by('-id')[:3]
+    
+    return render(request, 'home.html', {'productos_nuevos': productos_nuevos})
 
 @login_required
 def vista_agregar_producto(request):
