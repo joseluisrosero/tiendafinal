@@ -41,7 +41,7 @@ def vista_contacto(request):
     return render(request,'contacto.html',locals())
 
 def vista_home(request):
-    productos_nuevos = Producto.objects.filter(status=True).order_by('-id')[:3]
+    productos_nuevos = Producto.objects.filter(status=True).order_by('-id')[:4]
     
     return render(request, 'home.html', {'productos_nuevos': productos_nuevos})
 
@@ -71,31 +71,40 @@ def vista_ver_producto(request, id_prod):
     p = Producto.objects.get(id=id_prod)
     return render(request,'ver_producto.html',locals())
 
+@login_required
 def vista_editar_producto(request, id_prod):
     prod = Producto.objects.get(id=id_prod)
     if request.method == 'POST':
         formulario = agregar_producto_form(request.POST, request.FILES, instance=prod)
         if formulario.is_valid():
-            prod = formulario.save(commit=False)
+            if 'imagen-clear' in request.POST:  
+                if prod.imagen:
+                    prod.imagen.delete(save=False)
+                prod.imagen =None
 
-        if 'imagen' in request.FILES: 
-            image = request.FILES['imagen'] 
+            prod = formulario.save(commit=False)
+     
+      
+      
+            if 'imagen' in request.FILES: 
+                image = request.FILES['imagen']     
+                img_io = resize_and_compress_image(image) 
             
+                if img_io: 
+                    image_name = image.name 
+                    prod.imagen = InMemoryUploadedFile( img_io, 
+                        field_name='imagen', 
+                        name=image_name, 
+                        content_type=image.content_type, 
+                        size=sys.getsizeof(img_io), 
+                        charset=None )
             
-            img_io = resize_and_compress_image(image) 
-            
-            if img_io: 
-                image_name = image.name 
-                prod.imagen = InMemoryUploadedFile( img_io, 
-                    field_name='imagen', 
-                    name=image_name, 
-                    content_type=image.content_type, 
-                    size=sys.getsizeof(img_io), 
-                    charset=None )
-            
-            prod.save()
-            formulario.save_m2m()          
-            return redirect ('vista_ver_producto',id_prod=prod.id)
+        prod.save()
+
+        if formulario.cleaned_data.get('categorias'):
+                formulario.save_m2m()
+
+        return redirect('vista_ver_producto', id_prod=prod.id)
                
     else: 
         formulario = agregar_producto_form(instance = prod)
