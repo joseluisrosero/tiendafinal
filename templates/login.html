@@ -6,6 +6,7 @@
         <form method="post">
             {% csrf_token %}
             {{ formulario.as_p }}
+            <input type="hidden" name="next" value="{{ next }}"> <!-- Campo oculto para 'next' -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 <a href="{% url 'vista_lista_producto' %}" class="btn btn-secondary">Cancelar</a>

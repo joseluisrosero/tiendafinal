@@ -27,8 +27,13 @@
                     <p class="card-text"><b>Precio: </b>  {{ p.formatted_precio }} COP</p>
                     <p class="card-text"><b>Stock: </b> {{ p.stock }} unidades</p>
                     <a href="{% url 'vista_lista_producto' %}" class="btn btn-primary">Regresar a la lista</a>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'vista_editar_producto' id_prod=p.id %}" class="btn btn-secondary">Editar</a>
-                    <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}" class="btn btn-danger">Eliminar</a>
+                    {% endif%}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'vista_eliminar_producto' id_prod=p.id %}?next={{ request.path }}" class="btn btn-danger">Eliminar</a>
+                    {% endif %}
+
                 </div>
             </div>
         </div>

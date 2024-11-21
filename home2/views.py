@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from .forms import*
 from .models import*
 from django.contrib.auth import login, logout, authenticate
@@ -110,14 +110,22 @@ def vista_editar_producto(request, id_prod):
         formulario = agregar_producto_form(instance = prod)
     return render(request, 'vista_editar_producto.html',locals())
 
+
+
+@login_required
 def vista_eliminar_producto(request, id_prod):
-    prod = Producto.objects.get(id=id_prod)
-    prod.delete()
-    return redirect ('/lista_producto')
+    prod = get_object_or_404(Producto, id=id_prod)
+    if request.method == 'POST':
+        prod.delete()
+        return redirect('vista_lista_producto')
+    return render(request, 'confirmar_eliminar_producto.html', {'producto': prod})
+
 
 
 def vista_login(request):
     mensaje = ""
+    next_url = request.GET.get('next', 'vista_lista_producto')
+    
     if request.method == "POST":
         formulario = login_form(request.POST)
         if formulario.is_valid():
@@ -126,16 +134,15 @@ def vista_login(request):
             user = authenticate(username=usu, password=cla)
             if user is not None:
                 if user.is_active:
-                    login(request, user)
-                    request.session['usuario_id'] = user.id
-                    return redirect('vista_agregar_producto')
+                    login(request, user)                    
+                    return redirect(request.POST.get('next','vista_lista_producto'))
                 else:
                     mensaje = 'Cuenta desactivada.'
             else:
                 mensaje = 'Usuario o clave incorrectos.'
     else:
         formulario = login_form()
-    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje})
+    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
 
 
 

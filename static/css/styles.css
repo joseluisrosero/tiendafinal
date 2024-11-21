@@ -23,3 +23,8 @@
     height: 1px;  /* Ajusta la altura según necesites */
     object-fit: cover;  /* Para que la imagen se ajuste correctamente dentro del contenedor */
 }
+
+.centrar-texto {
+    text-align: center;
+}
+
