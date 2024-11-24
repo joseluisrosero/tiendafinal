@@ -10,7 +10,6 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 <button type="button" id="cancel-button" class="btn btn-secondary">Cancelar</button>
-
             </div>
         </form>
         {% if mensaje %}
@@ -21,11 +20,6 @@
     <script> 
     document.getElementById('cancel-button').addEventListener('click', function() { 
         window.history.back(); 
-    
-    
     });
     </script>
-
-
-
 {% endblock %}

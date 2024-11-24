@@ -124,9 +124,9 @@ def vista_eliminar_producto(request, id_prod):
 
 
 
-def vista_login(request):
+"""def vista_login(request):
     mensaje = ""
-    #next_url = request.GET.get('next', 'vista_lista_producto')
+    next_url = request.GET.get('next', request.POST.get('next', '/'))
     
     if request.method == "POST":
         formulario = login_form(request.POST)
@@ -137,17 +137,45 @@ def vista_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)                    
-                    #return redirect(request.POST.get('next', next_url))
-                    request.session ['usuario_id'] = user.id
-                    return redirect('vista_agregar_producto')
+                    return redirect(next_url)
+                    #request.session ['usuario_id'] = user.id
+                    #return redirect('vista_agregar_producto')
                 else:
                     mensaje = 'Cuenta desactivada.'
             else:
                 mensaje = 'Usuario o clave incorrectos.'
     else:
         formulario = login_form()
-    #return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
-    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje,})
+    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
+    #return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje,})
+"""
+
+def vista_login(request):
+    mensaje = ""
+    next_url = request.GET.get('next', request.POST.get('next', '/'))
+    
+    if request.method == "POST":
+        formulario = login_form(request.POST)
+        if formulario.is_valid():
+            usu = formulario.cleaned_data['usuario']
+            cla = formulario.cleaned_data['clave']
+            user = authenticate(username=usu, password=cla)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    print(f"User '{user.username}' logged in successfully. Redirecting to {next_url}")
+                    return redirect(next_url)
+                else:
+                    mensaje = 'Cuenta desactivada.'
+                    print("User account is deactivated.")
+            else:
+                mensaje = 'Usuario o clave incorrectos.'
+                print("Authentication failed: Invalid username or password.")
+    else:
+        formulario = login_form()
+    
+    print(f"Rendering login form. Next URL: {next_url}")
+    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
 
 
 
