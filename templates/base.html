@@ -23,7 +23,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vista_agregar_producto' %}">Agregar</a>
+                        <a class="nav-link" href="{% url 'vista_agregar_producto' %}?next={{ request.path }}">Agregar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'vista_lista_producto' %}">Lista de Productos</a>
@@ -50,16 +50,17 @@
                             {% endfor %}
                         </div>
                     </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vista_login' %}">Iniciar Sesion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vista_register' %}">Registrarse</a>
-                    </li>  
+
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'vista_logout' %}">Cerrar Sesión</a>
+                            <a class="nav-link" href="{% url 'vista_logout' %}?next={{request.path}}">Cerrar sesión</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vista_login' %}">iniciar sesión </a>
+                        </li>                  
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vista_register' %}">Registrarse</a>
                         </li>
                     {% endif %}
                     <!-- Otros enlaces -->

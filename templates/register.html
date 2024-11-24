@@ -8,9 +8,18 @@
         {% csrf_token %}
         {{ formulario.as_p }}
         <input type="submit" value="Registrarse" class= "btn btn-primary">
-        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="button" id="cancel-button" class= "btn btn-secondary">Cancelar</button>
 
+        
     </form>
+    <script> 
+    document.getElementById('cancel-button').addEventListener('click', function() { 
+        window.history.back(); 
+        
+        
+    });
+    </script>
+    
 
 
 {% endblock %} 

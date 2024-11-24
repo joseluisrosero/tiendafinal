@@ -1,13 +1,15 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth import login, logout, authenticate
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.http import HttpResponseRedirect
 from .forms import*
 from .models import*
-from django.contrib.auth import login, logout, authenticate
 from .decorators import login_required
 from.log_manager import LogManager
 from .utils.utils import resize_and_compress_image  
 import os
 import sys
-from django.core.files.uploadedfile import InMemoryUploadedFile
+
 
 
 # Create your views here.
@@ -124,7 +126,7 @@ def vista_eliminar_producto(request, id_prod):
 
 def vista_login(request):
     mensaje = ""
-    next_url = request.GET.get('next', 'vista_lista_producto')
+    #next_url = request.GET.get('next', 'vista_lista_producto')
     
     if request.method == "POST":
         formulario = login_form(request.POST)
@@ -135,20 +137,25 @@ def vista_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)                    
-                    return redirect(request.POST.get('next','vista_lista_producto'))
+                    #return redirect(request.POST.get('next', next_url))
+                    request.session ['usuario_id'] = user.id
+                    return redirect('vista_agregar_producto')
                 else:
                     mensaje = 'Cuenta desactivada.'
             else:
                 mensaje = 'Usuario o clave incorrectos.'
     else:
         formulario = login_form()
-    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
+    #return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
+    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje,})
+
 
 
 
 def vista_logout (request):
     logout(request)
-    return redirect('/login')
+    next = request.GET.get('next' , '/')
+    return HttpResponseRedirect(next)
 
 def vista_register(request):
     formulario = register_form()

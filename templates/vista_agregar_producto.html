@@ -8,10 +8,18 @@
         {% csrf_token %}
         {{ formulario.as_p }}
         <input type="submit" value="Agregar Producto" class="btn btn-primary"  >
-        <a href="{% url 'vista_lista_producto' %}" class="btn btn-secondary">Cancelar</a>
+        <button type="button" id="cancel-button" class= "btn btn-secondary">Cancelar</button>
 
   
     </form>
+    <script> 
+    document.getElementById('cancel-button').addEventListener('click', function() { 
+        window.history.back(); 
+            
+            
+    });
+    </script>
+
 {%endblock %} 
 
     
