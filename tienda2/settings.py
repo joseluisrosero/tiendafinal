@@ -52,6 +52,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 1209600  # Dos semanas, por ejemplo
+SESSION_SAVE_EVERY_REQUEST = True
+
+
 ROOT_URLCONF = 'tienda2.urls'
 
 TEMPLATES = [

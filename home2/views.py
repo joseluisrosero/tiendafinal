@@ -9,6 +9,8 @@ from.log_manager import LogManager
 from .utils.utils import resize_and_compress_image  
 import os
 import sys
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -47,7 +49,7 @@ def vista_home(request):
     
     return render(request, 'home.html', {'productos_nuevos': productos_nuevos})
 
-@login_required
+"""@login_required
 def vista_agregar_producto(request):
     if request.method == 'POST':
         formulario = agregar_producto_form(request.POST, request.FILES)
@@ -62,16 +64,72 @@ def vista_agregar_producto(request):
             # Redimensionar y comprimir la imagen 
             resize_and_compress_image(image, output_path)
 
+            
 
 
             return redirect('/lista_producto/')
     else: 
         formulario = agregar_producto_form()
     return render(request, 'vista_agregar_producto.html',locals())
+"""
 
+
+"""@login_required
+def vista_agregar_producto(request):
+    if not request.user.is_authenticated:
+        print("User is not authenticated.")
+    else:
+        print(f"User '{request.user.username}' is authenticated.")
+
+    if request.method == 'POST':
+        formulario = agregar_producto_form(request.POST, request.FILES)
+        if formulario.is_valid():
+            prod = formulario.save(commit=False)
+            prod.status = True
+            prod.save()
+            formulario.save_m2m()
+            # Obtener la imagen cargada y la ruta de guardado
+            image = request.FILES['imagen']
+            output_path = os.path.join('media/productos', image.name)
+            # Redimensionar y comprimir la imagen
+            resize_and_compress_image(image, output_path)
+
+            return redirect('vista_lista_producto')
+    else:
+        formulario = agregar_producto_form()
+    return render(request, 'vista_agregar_producto.html', locals())
+"""
 def vista_ver_producto(request, id_prod):
     p = Producto.objects.get(id=id_prod)
     return render(request,'ver_producto.html',locals())
+
+@login_required
+def vista_agregar_producto(request):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            print("User is not authenticated.")
+            return redirect('vista_login')
+
+        print(f"User '{request.user.username}' is authenticated and submitting a product.")
+        
+        formulario = agregar_producto_form(request.POST, request.FILES)
+        if formulario.is_valid():
+            prod = formulario.save(commit=False)
+            prod.status = True
+            prod.save()
+            formulario.save_m2m()
+            # Obtener la imagen cargada y la ruta de guardado
+            image = request.FILES['imagen']
+            output_path = os.path.join('media/productos', image.name)
+            # Redimensionar y comprimir la imagen
+            resize_and_compress_image(image, output_path)
+
+            return redirect('vista_lista_producto')
+    else:
+        formulario = agregar_producto_form()
+    
+    print(f"Rendering add product form. User '{request.user.username}' is authenticated.")
+    return render(request, 'vista_agregar_producto.html', locals())
 
 @login_required
 def vista_editar_producto(request, id_prod):
@@ -153,7 +211,10 @@ def vista_eliminar_producto(request, id_prod):
 def vista_login(request):
     mensaje = ""
     next_url = request.GET.get('next', request.POST.get('next', '/'))
-    
+
+    if not next_url or next_url == '/':
+        next_url = request.META.get('HTTP_REFERER', '/home/')
+
     if request.method == "POST":
         formulario = login_form(request.POST)
         if formulario.is_valid():
@@ -164,7 +225,7 @@ def vista_login(request):
                 if user.is_active:
                     login(request, user)
                     print(f"User '{user.username}' logged in successfully. Redirecting to {next_url}")
-                    return redirect(next_url)
+                    return redirect(next_url)  # Asegúrate de redirigir a next_url
                 else:
                     mensaje = 'Cuenta desactivada.'
                     print("User account is deactivated.")
@@ -173,9 +234,10 @@ def vista_login(request):
                 print("Authentication failed: Invalid username or password.")
     else:
         formulario = login_form()
-    
+
     print(f"Rendering login form. Next URL: {next_url}")
     return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
+
 
 
 
@@ -215,4 +277,5 @@ def productos_por_categoria(request, categoria_id):
     categoria = Categoria.objects.get(id=categoria_id)
     productos = Producto.objects.filter(categorias=categoria)
     return render(request, 'productos_por_categoria.html', {'productos': productos, 'categoria': categoria})
+
 

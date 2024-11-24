@@ -10,14 +10,15 @@
         <input type="submit" value="Agregar Producto" class="btn btn-primary"  >
         <button type="button" id="cancel-button" class="btn btn-secondary">Cancelar</button>  
     </form>
-
+    
     <script> 
     document.getElementById('cancel-button').addEventListener('click', function() { 
-        window.history.back(); 
+        window.history.go(-2); 
             
             
     });
     </script>
+
 {%endblock %} 
 
     
