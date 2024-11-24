@@ -9,11 +9,23 @@
             <input type="hidden" name="next" value="{{ next }}"> <!-- Campo oculto para 'next' -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                <a href="{% url 'vista_lista_producto' %}" class="btn btn-secondary">Cancelar</a>
+                <button type="button" id="cancel-button" class="btn btn-secondary">Cancelar</button>
+
             </div>
         </form>
         {% if mensaje %}
             <div class="alert alert-danger mt-3">{{ mensaje }}</div>
         {% endif %}
     </div>
+
+    <script> 
+    document.getElementById('cancel-button').addEventListener('click', function() { 
+        window.history.back(); 
+    
+    
+    });
+    </script>
+
+
+
 {% endblock %}
