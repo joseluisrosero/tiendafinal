@@ -348,6 +348,7 @@
 2024-11-24 18:09:31,902 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 18:09:41,710 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 18:09:43,357 - AppLogger - INFO - Lista de productos cargada correctamente.
+<<<<<<< HEAD
 2024-11-24 19:05:47,028 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 19:05:59,589 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 19:06:08,780 - AppLogger - INFO - Lista de productos cargada correctamente.
@@ -374,3 +375,27 @@
 2024-11-24 19:49:14,056 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 19:49:20,897 - AppLogger - INFO - Lista de productos cargada correctamente.
 2024-11-24 19:49:29,124 - AppLogger - INFO - Lista de productos cargada correctamente.
+=======
+>>>>>>> b766b5f22b79c341f6102075ac630830683dcde9
+2024-11-24 20:11:18,989 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-24 20:12:04,847 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-24 20:13:15,868 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-24 20:17:18,383 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 13:32:50,149 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 13:38:48,489 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:03:01,168 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:04:08,314 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:08:12,887 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:45:10,547 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:53:25,424 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 14:54:45,240 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 15:02:37,114 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 15:08:01,300 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 15:08:40,161 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 15:10:18,865 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 15:11:34,879 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 16:30:12,694 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 16:42:30,888 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 16:58:43,521 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 17:06:20,528 - AppLogger - INFO - Lista de productos cargada correctamente.
+2024-11-25 17:10:09,095 - AppLogger - INFO - Lista de productos cargada correctamente.

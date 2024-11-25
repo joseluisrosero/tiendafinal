@@ -5,8 +5,11 @@ from django.http import HttpResponseRedirect
 from .forms import agregar_producto_form, login_form, contacto_form, register_form
 from .models import Producto, Categoria, Marca
 from .utils.utils import resize_and_compress_image
+import requests
 import os
 import sys
+
+
 from django.contrib.auth.decorators import login_required
 from .log_manager import LogManager
 
@@ -70,10 +73,37 @@ def vista_contacto(request):
         formulario= contacto_form()    
     return render(request,'contacto.html',locals())
 
-def vista_home(request):
+"""def vista_home(request):
     productos_nuevos = Producto.objects.filter(status=True).order_by('-id')[:4]
     
     return render(request, 'home.html', {'productos_nuevos': productos_nuevos})
+"""
+
+
+def vista_home(request):
+    # Obtener productos nuevos
+    productos_nuevos = Producto.objects.filter(status=True).order_by('-id')[:4]
+
+    # Obtener datos de anime
+    url = 'http://localhost:3000/anime/gogoanime/search'
+    params = {'query': 'One Piece'}
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        anime_data = response.json().get('results', [])  # Obtener los resultados
+        print(f"Datos obtenidos de la API: {anime_data}")  # Imprimir datos obtenidos
+    except requests.exceptions.RequestException as e:
+        anime_data = []
+        print(f"Error al conectar con la API de Consumet: {e}")
+
+    context = {
+        'productos_nuevos': productos_nuevos,
+        'anime_data': anime_data
+    }
+    return render(request, 'home.html', context)
+
+
+
 
 
 
