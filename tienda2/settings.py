@@ -58,9 +58,16 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_AGE = 1209600  # Dos semanas, por ejemplo
-SESSION_SAVE_EVERY_REQUEST = True
+# settings.py
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Asegura que las sesiones se almacenen en la base de datos
+SESSION_COOKIE_AGE = 1209600  # Dos semanas
+SESSION_SAVE_EVERY_REQUEST = True  # Guarda la sesión en cada solicitud
+SESSION_COOKIE_SECURE = False  # Asegúrate de que esta configuración sea coherente con tu entorno (cámbialo a True en producción con HTTPS)
+CSRF_COOKIE_SECURE = False
+
+
+
 
 
 ROOT_URLCONF = 'tienda2.urls'

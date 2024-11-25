@@ -1,15 +1,41 @@
-from django.shortcuts import render,redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponseRedirect
-from .forms import*
-from .models import*
-from .decorators import login_required
-from.log_manager import LogManager
-from .utils.utils import resize_and_compress_image  
+from .forms import agregar_producto_form, login_form, contacto_form, register_form
+from .models import Producto, Categoria, Marca
+from .utils.utils import resize_and_compress_image
 import os
 import sys
 from django.contrib.auth.decorators import login_required
+from .log_manager import LogManager
+
+
+
+
+@login_required
+def vista_agregar_producto(request):
+    if request.method == 'POST':
+        print(f"User '{request.user.username}' is authenticated and submitting a product.")
+        
+        formulario = agregar_producto_form(request.POST, request.FILES)
+        if formulario.is_valid():
+            prod = formulario.save(commit=False)
+            prod.status = True
+            prod.save()
+            formulario.save_m2m()
+            
+            if 'imagen' in request.FILES:
+                image = request.FILES['imagen']
+                output_path = os.path.join('media/productos', image.name)
+                resize_and_compress_image(image, output_path)
+            
+            return redirect('vista_lista_producto')
+    else:
+        formulario = agregar_producto_form()
+    
+    return render(request, 'vista_agregar_producto.html', locals())
+
 
 
 
@@ -49,29 +75,6 @@ def vista_home(request):
     
     return render(request, 'home.html', {'productos_nuevos': productos_nuevos})
 
-"""@login_required
-def vista_agregar_producto(request):
-    if request.method == 'POST':
-        formulario = agregar_producto_form(request.POST, request.FILES)
-        if formulario.is_valid():
-            prod = formulario.save(commit=False)
-            prod.status = True
-            prod.save()
-            formulario.save_m2m()
-            # Obtener la imagen cargada y la ruta de guardado
-            image = request.FILES['imagen']
-            output_path = os.path.join('media/productos', image.name) 
-            # Redimensionar y comprimir la imagen 
-            resize_and_compress_image(image, output_path)
-
-            
-
-
-            return redirect('/lista_producto/')
-    else: 
-        formulario = agregar_producto_form()
-    return render(request, 'vista_agregar_producto.html',locals())
-"""
 
 
 """@login_required
@@ -103,33 +106,7 @@ def vista_ver_producto(request, id_prod):
     p = Producto.objects.get(id=id_prod)
     return render(request,'ver_producto.html',locals())
 
-@login_required
-def vista_agregar_producto(request):
-    if request.method == 'POST':
-        if not request.user.is_authenticated:
-            print("User is not authenticated.")
-            return redirect('vista_login')
 
-        print(f"User '{request.user.username}' is authenticated and submitting a product.")
-        
-        formulario = agregar_producto_form(request.POST, request.FILES)
-        if formulario.is_valid():
-            prod = formulario.save(commit=False)
-            prod.status = True
-            prod.save()
-            formulario.save_m2m()
-            # Obtener la imagen cargada y la ruta de guardado
-            image = request.FILES['imagen']
-            output_path = os.path.join('media/productos', image.name)
-            # Redimensionar y comprimir la imagen
-            resize_and_compress_image(image, output_path)
-
-            return redirect('vista_lista_producto')
-    else:
-        formulario = agregar_producto_form()
-    
-    print(f"Rendering add product form. User '{request.user.username}' is authenticated.")
-    return render(request, 'vista_agregar_producto.html', locals())
 
 @login_required
 def vista_editar_producto(request, id_prod):
@@ -182,31 +159,6 @@ def vista_eliminar_producto(request, id_prod):
 
 
 
-"""def vista_login(request):
-    mensaje = ""
-    next_url = request.GET.get('next', request.POST.get('next', '/'))
-    
-    if request.method == "POST":
-        formulario = login_form(request.POST)
-        if formulario.is_valid():
-            usu = formulario.cleaned_data['usuario']
-            cla = formulario.cleaned_data['clave']
-            user = authenticate(username=usu, password=cla)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)                    
-                    return redirect(next_url)
-                    #request.session ['usuario_id'] = user.id
-                    #return redirect('vista_agregar_producto')
-                else:
-                    mensaje = 'Cuenta desactivada.'
-            else:
-                mensaje = 'Usuario o clave incorrectos.'
-    else:
-        formulario = login_form()
-    return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje, 'next': next_url})
-    #return render(request, 'login.html', {'formulario': formulario, 'mensaje': mensaje,})
-"""
 
 def vista_login(request):
     mensaje = ""

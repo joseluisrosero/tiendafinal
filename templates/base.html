@@ -21,10 +21,11 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'home' %}">Inicio <span class="sr-only">(current)</span></a>
                     </li>
-                    
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vista_login' %}?next={% url 'vista_agregar_producto' %}">Agregar</a>
+                        <a class="nav-link" href="{% url 'vista_agregar_producto' %}">Agregar Producto</a>
                     </li>
+                    {%endif%}
                     <li class="nav-item"> 
                         <a class="nav-link" href="{% url 'vista_lista_producto' %}">Lista de Productos</a> 
                     </li>
